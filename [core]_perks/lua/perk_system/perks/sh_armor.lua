@@ -7,7 +7,7 @@ PERK.Icon = ""
 PERK.OnBuy = function(ply)
     local amount = Perks:GetPerkAmount(PERK.ID, ply:SteamID())
     if amount == 0 then return end
-    ply:SetArmor(ply:Armor()()+(amount*40))
+    ply:SetArmor(ply:Armor()+(amount*40))
     ply:SetMaxArmor(ply:GetMaxArmor()+(amount*40))
 end
 
