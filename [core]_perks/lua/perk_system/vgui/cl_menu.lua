@@ -5,9 +5,10 @@ local PANEL = {}
 function PANEL:Init()
     self.ScrollPanel = self:Add("PIXEL.ScrollPanel")
     self.ScrollPanel:Dock(FILL)
+    self.ScrollPanel.VBar:SetWide(0)
 
     for k, v in pairs(Perks.Perks) do
-        local panel = self:Add("DPanel")
+        local panel = self.ScrollPanel:Add("DPanel")
         panel:Dock(TOP)
         panel:DockMargin(0, 0, 0, 5)
         panel:SetTall(80)
@@ -37,14 +38,14 @@ function PANEL:Init()
         description:SetText(v.Description)
         description:SetFont("Perks:15")
         description:SizeToContents()
-        --Color(175 , 0 ,255)
+
         local levels = panel:Add("PIXEL.Button")
         levels:Dock(FILL)
         levels:DockMargin(5, 0, 5, 5)
         levels.Paint = function(s, w, h)
             local font, playeramount = "Perks:20", Perks.PlayerPerks[v.ID] and tonumber(Perks.PlayerPerks[v.ID]) or 0
             if playeramount >= v.Amount then
-                PIXEL.DrawRoundedBox(14, 0, 0, w, h, Color(175 , 0 ,255))
+                PIXEL.DrawRoundedBox(14, 0, 0, w, h, PIXEL.Colors.Primary)
                 PIXEL.DrawSimpleText("MAXED", font, w/2, h/2, color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
             else
                 PIXEL.DrawSimpleText(playeramount, font, 5, h/2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
@@ -56,7 +57,7 @@ function PANEL:Init()
 
                 w = w-w1-w2-20
                 PIXEL.DrawRoundedBox(14, w1+8, 0, w, h, PIXEL.Colors.Scroller)
-                PIXEL.DrawRoundedBox(14, w1+8, 0, (w/v.Amount)*playeramount, h, Color(175 , 0 ,255))
+                PIXEL.DrawRoundedBox(14, w1+8, 0, (w/v.Amount)*playeramount, h, PIXEL.Colors.Primary)
             end
         end
         levels.DoClick = function(s)
