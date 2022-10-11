@@ -14,7 +14,7 @@ end
 Perks.Perks[PERK.ID] = PERK
 
 hook.Add("PlayerSpawn", "Perks:PlayerArmor", function(ply)
-    timer.Simple(1, function(arguments)
+    timer.Simple(1, function()
     PERK.OnBuy(ply) // fixes some stacking issue's    
     end)
 end)
